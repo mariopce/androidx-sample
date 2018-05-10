@@ -1,0 +1,72 @@
+apply plugin: 'com.android.application'
+
+apply plugin: 'kotlin-android'
+
+apply plugin: 'kotlin-android-extensions'
+
+apply plugin: 'kotlin-kapt'
+
+android {
+    buildToolsVersion "28-rc2"
+    compileSdkVersion 'android-P'
+
+    defaultConfig {
+        applicationId "pl.saramak.test.jobscheduler"
+        minSdkVersion 19
+        targetSdkVersion 27
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation"org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation 'androidx.coordinatorlayout:coordinatorlayout:1.0.0-alpha1'
+
+    def lifecycle_version = "2.0.+"
+
+    // ViewModel and LiveData
+    implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle_version"
+    // alternatively - just ViewModel
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version" // use -ktx for Kotlin
+    // alternatively - just LiveData
+    implementation "androidx.lifecycle:lifecycle-livedata:$lifecycle_version"
+    // alternatively - Lifecycles only (no ViewModel or LiveData). Some UI
+    //     AndroidX libraries use this lightweight import for Lifecycle
+    implementation "androidx.lifecycle:lifecycle-runtime:$lifecycle_version"
+
+    implementation "androidx.appcompat:appcompat:1.0.0-alpha1"
+
+    kapt "androidx.lifecycle:lifecycle-compiler:$lifecycle_version"
+
+
+    // optional - Test helpers for LiveData
+    testImplementation "androidx.arch.core:core-testing:$lifecycle_version"
+
+    def nav_version = "1.0.0-alpha01"
+    implementation "androidx.fragment:fragment-ktx:1.0.0-alpha1"
+    implementation 'androidx.core:core-ktx:1.0.0-alpha1'
+//    implementation "android.arch.navigation:navigation-common-ktx:1.0.0-alpha01"
+//    implementation "android.arch.navigation:navigation-fragment-ktx:1.0.0-alpha01"
+//    implementation "android.arch.navigation:navigation-runtime-ktx:1.0.0-alpha01"
+//    implementation "android.arch.navigation:navigation-testing-ktx:1.0.0-alpha01"
+//    implementation "android.arch.navigation:navigation-ui-ktx:1.0.0-alpha01"
+//    implementation "android.arch.work:work-runtime-ktx:1.0.0-alpha01"
+
+    // optional - Test helpers
+//    androidTestImplementation "androidx.navigation:navigation-testing-ktx:$nav_version" // use -ktx for Kotlin
+
+
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test:runner:1.0.2'
+    androidTestImplementation "androidx.test.espresso:espresso-core:3.1.0-alpha1"
+}
